@@ -19,5 +19,5 @@ list(APPEND LIBS pthread)
 add_executable(udp-client UDPClient.cpp)
 target_link_libraries(udp-client PUBLIC ${LIBS})
 
-# add_executable(udp-server serverUDP.cpp)
-# target_link_libraries(udp-server PUBLIC ${LIBS})
+add_executable(udp-server serverUDP.cpp)
+target_link_libraries(udp-server PUBLIC ${LIBS})
