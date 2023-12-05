@@ -1,4 +1,4 @@
-#include <apra/inet.h>
+#include <arpa/inet.h>
 #include <iostream>
 #include <netinet/in.h>
 #include <stdlib.h>
@@ -14,8 +14,7 @@ using namespace std;
 int start_server() {
     int serv_socket, bytes;
     msghdr msg;
-    socklen_t length;
-    sockaddr_in server_addr, client_addr;
+    sockaddr_in server_addr;
 
     if ((serv_socket = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
         perror("cannot create socket");
