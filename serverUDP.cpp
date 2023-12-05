@@ -46,7 +46,6 @@ int start_server() {
         bytes = recvmsg(serv_socket, &msg, 0);
         cout << "Packet received" << endl;
     }
-
     return 0;
 }
 

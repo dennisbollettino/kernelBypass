@@ -1,4 +1,4 @@
-#include thread_utils.h
+#include <thread_utils.h>
 #include <iostream>
 #include <cstring>
 #include <arpa/inet.h>
@@ -47,6 +47,7 @@ void start_client() {
 }
 
 int main() {
-    createAndStartThread(1, "client", start_client)
+    auto t1 = createAndStartThread(1, "client", start_client);
+    t1->join();
     return 0;
 }
