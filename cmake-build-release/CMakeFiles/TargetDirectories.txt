@@ -1,5 +1,0 @@
-/home/dom/Projects/kernelBypass/cmake-build-release/CMakeFiles/libcommon.dir
-/home/dom/Projects/kernelBypass/cmake-build-release/CMakeFiles/udp-client.dir
-/home/dom/Projects/kernelBypass/cmake-build-release/CMakeFiles/udp-server.dir
-/home/dom/Projects/kernelBypass/cmake-build-release/CMakeFiles/edit_cache.dir
-/home/dom/Projects/kernelBypass/cmake-build-release/CMakeFiles/rebuild_cache.dir
