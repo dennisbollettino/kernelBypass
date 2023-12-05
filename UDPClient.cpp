@@ -1,3 +1,4 @@
+#include thread_utils.h
 #include <iostream>
 #include <cstring>
 #include <arpa/inet.h>
@@ -13,7 +14,7 @@ void start_client() {
     }
 
     // Server address information
-    sockaddr_in server_address;
+    struct sockaddr_in server_address;
     server_address.sin_family = AF_INET;
     server_address.sin_port = htons(8000);
     server_address.sin_addr.s_addr = inet_addr("10.0.0.23");
@@ -46,6 +47,6 @@ void start_client() {
 }
 
 int main() {
-    start_client();
+    createAndStartThread(1, "client", start_client)
     return 0;
 }
