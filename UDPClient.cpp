@@ -19,14 +19,24 @@ void start_client() {
     server_address.sin_addr.s_addr = inet_addr("10.0.0.23");
 
     // Data to be sent (32-byte payload size)
-    const char* message = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";  // Adjust the message as needed
+    const char* message = "0123456789ABCDEFGHIJKLMNOPQRSTUV";  // Adjust the message as needed
     int message_length = strlen(message);
 
+    // Prepare the message structure
+    iovec iov[1];
+    iov[0].iov_base = (void*)message;
+    iov[0].iov_len = message_length;
+
+    msghdr message_header;
+    message_header.msg_name = (void*)&server_address;
+    message_header.msg_namelen = sizeof(server_address);
+    message_header.msg_iov = iov;
+    message_header.msg_iovlen = 1;
+
     // Sending 32-byte UDP packets in a loop
-    for (int i = 0; i < 10; ++i) {
-        // Send the message to the server
-        sendto(client_socket, message, message_length, 0,
-               (const struct sockaddr*)&server_address, sizeof(server_address));
+    while (1) {
+        // Send the message to the server using sendmsg
+        sendmsg(client_socket, &message_header, 0);
 
         std::cout << "Packet " << i + 1 << " sent\n";
     }
