@@ -1,3 +1,4 @@
+#include <thread_utils.h>
 #include <arpa/inet.h>
 #include <iostream>
 #include <netinet/in.h>
@@ -59,9 +60,7 @@ int start_server() {
 }
 
 int main() {
-    if (start_server() < 0) {
-        exit(EXIT_FAILURE);
-    }
-
+    auto t1 = createAndStartThread(1, "udp-server", start_server);
+    t1->join();
     exit(EXIT_SUCCESS);
 }
