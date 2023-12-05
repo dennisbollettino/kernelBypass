@@ -55,7 +55,6 @@ int start_server() {
         cout << "Packet received" << endl;
         cout << "The message was: " << iov[0].iov_base << endl;
     }
-
     return 0;
 }
 
