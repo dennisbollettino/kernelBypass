@@ -12,9 +12,12 @@
 using namespace std;
 
 int start_server() {
+    char buffer[32];
     int serv_socket, bytes;
-    msghdr msg;
-    sockaddr_in server_addr;
+    struct iovec iov[1];
+    struct msghdr msg;
+    struct sockaddr_in server_addr;
+    
 
     if ((serv_socket = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
         perror("cannot create socket");
@@ -22,6 +25,8 @@ int start_server() {
     }
 
     memset(&server_addr, 0, sizeof(server_addr));
+    memset(&msg, 0, sizeof(msg));
+    memset(iov, 0, sizeof(iov));
 
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = INADDR_ANY;
@@ -33,9 +38,8 @@ int start_server() {
         return -1;
     }
 
-    iovec iov[1];
-    iov[0].iov_base = NULL;
-    iov[0].iov_len = 0;
+    iov[0].iov_base = buffer;
+    iov[0].iov_len = sizeof(buffer);
 
     msg.msg_name = (void*)&server_addr;
     msg.msg_namelen = sizeof(server_addr);
@@ -43,8 +47,13 @@ int start_server() {
     msg.msg_iovlen = 1;
 
     while(true) {
-        bytes = recvmsg(serv_socket, &msg, 0);
+        if ((bytes = recvmsg(serv_socket, &msg, 0)) < 0) {
+            perror("recvmsg error");
+            return -1;
+        }
+        
         cout << "Packet received" << endl;
+        cout << "The message was: " << iov[0].iov_base << endl;
     }
 
     return 0;
