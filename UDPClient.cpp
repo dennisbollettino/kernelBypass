@@ -38,7 +38,7 @@ void start_client() {
         // Send the message to the server using sendmsg
         sendmsg(client_socket, &message_header, 0);
 
-        std::cout << "Packet " << i + 1 << " sent\n";
+        std::cout << "Packet sent\n";
     }
 
     // Close the socket when done
